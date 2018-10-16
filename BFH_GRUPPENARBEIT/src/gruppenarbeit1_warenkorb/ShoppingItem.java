@@ -4,18 +4,20 @@ public class ShoppingItem {
 	/*
 	* Gruppenarbeit 01: Warenkorb
 	* Klasse 1o
-	* Ziegler, Andrin; Frei, Yannick; Dr‰yer, Michael
+	* Ziegler, Andrin; Frei, Yannick; Dr√§yer, Michael
 	*
 	*/
 	// the fields
 	private String name;
 	private double price;
 	private int amountInBasket;
+	private double taxRate;
 
 	// fill the fields in the constructor
-	public ShoppingItem(String name, double price) {
+	public ShoppingItem(String name, double price, double taxRate) {
 		this.setName(name);
 		this.setPrice(price);
+		this.setTaxRate(taxRate);
 	}
 
 	public String getName() {
@@ -40,5 +42,13 @@ public class ShoppingItem {
 
 	public void setAmountInBasket(int amountInBasket) {
 		this.amountInBasket = amountInBasket;
+	}
+
+	public double getTaxRate() {
+		return taxRate;
+	}
+
+	public void setTaxRate(double taxRate) {
+		this.taxRate = taxRate;
 	}
 }

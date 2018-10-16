@@ -7,7 +7,7 @@ public class BasketManager {
 	/*
 	* Gruppenarbeit 01: Warenkorb
 	* Klasse 1o
-	* Ziegler, Andrin; Frei, Yannick; Dr‰yer, Michael
+	* Ziegler, Andrin; Frei, Yannick; Dr√§yer, Michael
 	*
 	*/
 	private ArrayList<ShoppingItem> availableItems;
@@ -36,13 +36,19 @@ public class BasketManager {
 	public void showPossibleBuys() {
 		// Anweisungen
 		System.out.println("---------------------");
-		System.out.println("You can buy following items:");
+		System.out.println("\nYou can buy following items:\n");
 		// check if the basket is currently empty
 		for (int i = 1; i < availableItems.size() + 1; i++) {
+			// calculate tax of item
+			double tax = calculateTaxOfItem(availableItems.get(i - 1));
 			System.out.println(i + ") " + availableItems.get(i - 1).getName() + "   "
-					+ String.format("%.2f", availableItems.get(i - 1).getPrice()) + " CHF");
+					+ String.format("%.2f", availableItems.get(i - 1).getPrice()) + " CHF " + "("+ String.format("%.2f", tax) +" CHF)" );
 		}
 		enableBuying();
+	}
+
+	private double calculateTaxOfItem(ShoppingItem shoppingItem) {
+		return shoppingItem.getPrice() / 100 * shoppingItem.getTaxRate();
 	}
 
 	public void enableBuying() {
