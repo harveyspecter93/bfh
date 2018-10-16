@@ -4,3 +4,4 @@ Open Tasks:
 2. MwSt. needs to be displayed in showPossibleBuys()
 3. MwSt. needs to be calculated and displayed in showCurrentBasket()
 4. Display total price line (with 3. ) in showCurrentBasket()
+5. Insert tabs to beautify output
