@@ -18,6 +18,9 @@ public class BasketManager {
 	}
 
 	public void showCurrentBasket() {
+		double totalPrice = 0;
+		double totalTax = 0;
+		
 		System.out.println("----------------------------------------------------------------");
 		
 		// check if the basket is currently empty
@@ -26,8 +29,15 @@ public class BasketManager {
 		}else {
 			System.out.println("Your Basket:");
 			for (ShoppingItem item : itemsInBasket) {
-			    System.out.println(item.getAmountInBasket() + " " + item.getName() + " " + String.format("%.2f", item.getPrice()) + " CHF " + String.format("%.2f", item.getPrice() * item.getAmountInBasket()) + " CHF");
+			    System.out.println(item.getAmountInBasket() + " " + item.getName() + " " 
+			    		+ String.format("%.2f", item.getPrice()) + " CHF " 
+			    		+ String.format("%.2f", item.getPrice() * item.getAmountInBasket()) + " CHF ");
+			    
+			    totalPrice += item.getPrice() * item.getAmountInBasket();
+			    totalTax += calculateTaxOfItem(item) * item.getAmountInBasket();
 			}
+			System.out.println("Total price is " + String.format("%.2f", totalPrice) + " CHF with a total amount of " + 
+					String.format("%.2f", totalTax) + " CHF taxes (" + String.format("%.2f",calculateTotalTax(totalPrice, totalTax)) + "%).");
 			
 		}
 		showPossibleBuys();
@@ -51,6 +61,10 @@ public class BasketManager {
 		return shoppingItem.getPrice() / 100 * shoppingItem.getTaxRate();
 	}
 
+	private double calculateTotalTax(double totalPrice, double totalTax) {
+		return 100 / totalPrice * totalTax;
+	}
+	
 	public void enableBuying() {
 		System.out.println("What item would you like to add to your basket? (1,2,3 or q to quit)");
 		// check for Quit
