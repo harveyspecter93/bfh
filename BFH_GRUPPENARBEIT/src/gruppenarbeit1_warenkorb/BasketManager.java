@@ -56,11 +56,14 @@ public class BasketManager {
 	
 		ShoppingItem itemToBuy = availableItems.get(productToBuy - 1); 
 		
-		System.out.println("How many " + itemToBuy.getName() + " you'd like to add to your basket?");
+		System.out.println("How many " + itemToBuy.getName() + " you'd like to add to your basket? (Integer or a to abort)");
 		// check for Quit
 		int amountToBuy = readAmount();
-		
+		if(amountToBuy != 0) {
 		addItemToBasket(itemToBuy, amountToBuy);
+		}else {
+			System.out.println("You changed your mind and don't want to add " + itemToBuy.getName());
+		}
 		showCurrentBasket();
 	}
 
@@ -121,9 +124,12 @@ public class BasketManager {
 		while (amount <= 0) {
 			while (!input.hasNextInt()) {
 				// check for quit
-
-				System.out.println("That's not a valid amount, enter an Integer!");
-				input.next();
+				
+				if("a".equals(input.nextLine())) {
+					System.out.println("Aborting..");
+				}
+				
+				return 0;
 			}
 			
 			amount = input.nextInt();
