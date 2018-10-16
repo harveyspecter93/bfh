@@ -94,9 +94,14 @@ public class BasketManager {
 		while (number <= 0) {
 			while (!input.hasNextInt()) {
 				// check for quit
-
-				System.out.println("That's not a number!");
-				input.next();
+				
+				if("q".equals(input.nextLine())) {
+					System.out.println("Thank you for shopping in our store. We value your patronage.\r\n" + 
+							"Please visit us again soon! Andrin, Yannick & Michael");
+					System.exit(1);
+				}
+				System.out.println("That's not a valid input!");
+				number = 0;
 			}
 			
 			number = input.nextInt();
