@@ -7,7 +7,7 @@ public class BasketManager {
 	/*
 	* Gruppenarbeit 01: Warenkorb
 	* Klasse 1o
-	* Ziegler, Andrin; Frei, Yannick; Dr√§yer, Michael
+	* Ziegler, Andrin; Frei, Yannick; Dr‰yer, Michael
 	*
 	*/
 	private ArrayList<ShoppingItem> availableItems;
@@ -20,6 +20,8 @@ public class BasketManager {
 	public void showCurrentBasket() {
 		double totalPrice = 0;
 		double totalTax = 0;
+		int itemAmountPadding = 0, itemPricePadding = 0, amountInBasket = 0;
+		String itemPrice = "", itemTotalPrice = "";
 		
 		System.out.println("----------------------------------------------------------------");
 		
@@ -29,15 +31,24 @@ public class BasketManager {
 		}else {
 			System.out.println("Your Basket:");
 			for (ShoppingItem item : itemsInBasket) {
-			    System.out.println(item.getAmountInBasket() + " " + item.getName() + " " 
-			    		+ String.format("%.2f", item.getPrice()) + " CHF " 
-			    		+ String.format("%.2f", item.getPrice() * item.getAmountInBasket()) + " CHF ");
+			    
+				amountInBasket = item.getAmountInBasket();
+				itemAmountPadding = 4 - (int)(Math.log10(amountInBasket)+1);
+				itemPricePadding = 45 - item.getName().length();
+				itemPrice = String.format("%.2f", item.getPrice()) + " CHF"; 
+				itemTotalPrice = String.format("%.2f", item.getPrice() * amountInBasket ) + " CHF" ;
+				
+				String formatedOutput = String.format(padLeft(" ", itemAmountPadding) + amountInBasket 
+														+ " " + item.getName()
+ 														+ padLeft(itemPrice, itemPricePadding)
+														+ padLeft(itemTotalPrice, 15));
+				System.out.println(formatedOutput);
 			    
 			    totalPrice += item.getPrice() * item.getAmountInBasket();
 			    totalTax += calculateTaxOfItem(item) * item.getAmountInBasket();
 			}
-			System.out.println("Total price is " + String.format("%.2f", totalPrice) + " CHF with a total amount of " + 
-					String.format("%.2f", totalTax) + " CHF taxes (" + String.format("%.2f",calculateTotalTax(totalPrice, totalTax)) + "%).");
+			System.out.println("\nTotal price is " + String.format("%.2f", totalPrice) + " CHF with a total amount of " + 
+					String.format("%.2f", totalTax) + " CHF taxes (" + String.format("%.2f",calculateTotalTax(totalPrice, totalTax)) + "%). \n");
 			
 		}
 		showPossibleBuys();
@@ -45,18 +56,34 @@ public class BasketManager {
 
 	public void showPossibleBuys() {
 		// Anweisungen
+		String number, itemName, itemPrice, itemTax;
+		int itemPadding = 0;
 		System.out.println("---------------------");
-		System.out.println("\nYou can buy following items:\n");
+		System.out.println("You can buy following items:\n");
 		// check if the basket is currently empty
 		for (int i = 1; i < availableItems.size() + 1; i++) {
-			// calculate tax of item
-			double tax = calculateTaxOfItem(availableItems.get(i - 1));
-			System.out.println(i + ") " + availableItems.get(i - 1).getName() + "   "
-					+ String.format("%.2f", availableItems.get(i - 1).getPrice()) + " CHF " + "("+ String.format("%.2f", tax) +" CHF)" );
+
+			number = i + ") ";
+			itemName = availableItems.get(i - 1).getName();
+			itemPrice = String.format("%.2f", availableItems.get(i - 1).getPrice()) + " CHF";
+			itemTax = "(" + String.format("%.2f", calculateTaxOfItem(availableItems.get(i - 1))) + " CHF)";
+
+			itemPadding = 40 - itemName.length();
+            
+            String formatedOutput = String.format(number + itemName + padLeft(itemPrice, itemPadding) + padLeft(itemTax, 15));
+            System.out.println(formatedOutput);
+
 		}
+
+		System.out.println("---------------------\n");
+		
 		enableBuying();
 	}
-
+	
+	public static String padLeft(String s, int n) {
+	    return String.format("%1$" + n + "s", s);  
+	}
+	
 	private double calculateTaxOfItem(ShoppingItem shoppingItem) {
 		return shoppingItem.getPrice() / 100 * shoppingItem.getTaxRate();
 	}
@@ -67,6 +94,7 @@ public class BasketManager {
 	
 	public void enableBuying() {
 		System.out.println("What item would you like to add to your basket? (1,2,3 or q to quit)");
+		
 		// check for Quit
 		int productToBuy = 0;
 		while(productToBuy <= 0) {
