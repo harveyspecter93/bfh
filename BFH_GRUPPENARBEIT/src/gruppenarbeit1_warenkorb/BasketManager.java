@@ -93,7 +93,7 @@ public class BasketManager {
 
 	private double calculateTotalTax(double totalPrice, double totalTax) {
 		
-		return totalTax / ( totalPrice - totalTax );
+		return 100* ( totalTax / ( totalPrice - totalTax ) );
 	}
 	
 	public void enableBuying() {

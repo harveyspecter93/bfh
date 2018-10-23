@@ -49,9 +49,6 @@ public class Shopping {
 		System.out.println("de für deutsch, en für englisch / en for english de for german!");		
 		
 		
-		// get language
-		boolean check = !"de".equals(lang);
-		boolean checkWhile;
 		//default is german
 		currentBundle = bundleGerman;
 		
