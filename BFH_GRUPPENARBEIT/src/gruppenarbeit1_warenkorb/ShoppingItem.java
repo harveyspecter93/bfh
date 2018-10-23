@@ -15,9 +15,9 @@ public class ShoppingItem {
 
 	// fill the fields in the constructor
 	public ShoppingItem(String name, double price, double taxRate) {
-		this.setName(name);
-		this.setPrice(price);
-		this.setTaxRate(taxRate);
+		this.name = name;
+		this.price = price;
+		this.taxRate = taxRate;
 	}
 
 	public String getName() {
