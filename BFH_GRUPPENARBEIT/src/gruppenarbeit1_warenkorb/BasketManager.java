@@ -1,20 +1,23 @@
 package gruppenarbeit1_warenkorb;
 
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 import java.util.Scanner;
 
 public class BasketManager {
 	/*
 	* Gruppenarbeit 01: Warenkorb
 	* Klasse 1o
-	* Ziegler, Andrin; Frei, Yannick; Dräyer, Michael
+	* Ziegler, Andrin; Frei, Yannick; Drï¿½yer, Michael
 	*
 	*/
 	private ArrayList<ShoppingItem> availableItems;
 	private ArrayList<ShoppingItem> itemsInBasket = new ArrayList<ShoppingItem>();
+	private ResourceBundle bundle;
 
-	public BasketManager(ArrayList<ShoppingItem> availableItems) {
+	public BasketManager(ArrayList<ShoppingItem> availableItems, ResourceBundle bundle) {
 		this.availableItems = availableItems;
+		this.bundle = bundle; 
 	}
 
 	public void showCurrentBasket() {
@@ -27,7 +30,7 @@ public class BasketManager {
 		
 		// check if the basket is currently empty
 		if (itemsInBasket.isEmpty()) {	
-			System.out.println("Your Basket is empty.");
+			System.out.println(this.bundle.getString("EMPTY_BASKET"));
 		}else {
 			System.out.println("Your Basket:");
 			for (ShoppingItem item : itemsInBasket) {
@@ -59,7 +62,7 @@ public class BasketManager {
 		String number, itemName, itemPrice, itemTax;
 		int itemPadding = 0;
 		System.out.println("---------------------");
-		System.out.println("You can buy following items:\n");
+		System.out.println(this.bundle.getString("ITEMS_AVAILABLE"));
 		// check if the basket is currently empty
 		for (int i = 1; i < availableItems.size() + 1; i++) {
 
@@ -93,7 +96,7 @@ public class BasketManager {
 	}
 	
 	public void enableBuying() {
-		System.out.println("What item would you like to add to your basket? (1,2,3 or q to quit)");
+		System.out.println(this.bundle.getString("ITEM_CHOICE"));
 		
 		// check for Quit
 		int productToBuy = 0;
@@ -147,8 +150,7 @@ public class BasketManager {
 				// check for quit
 				
 				if("q".equals(input.nextLine())) {
-					System.out.println("Thank you for shopping in our store. We value your patronage.\r\n" + 
-							"Please visit us again soon! Andrin, Yannick & Michael");
+					System.out.println(this.bundle.getString("BYE"));
 					System.exit(1);
 				}
 				System.out.println("That's not a valid input!");
