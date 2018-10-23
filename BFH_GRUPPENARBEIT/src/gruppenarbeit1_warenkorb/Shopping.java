@@ -66,7 +66,7 @@ public class Shopping {
 				System.out.println(currentBundle.getString("LANGUAGE_CHOSEN"));
 				break;
 			}
-			System.out.println("No languge chosen! try again. Noch keine Sprache ausgewählt! Versuchen Sie es erneut.");
+			System.out.println("No language chosen! try again. Noch keine Sprache ausgewählt! Versuchen Sie es erneut.");
 		}
 		return currentBundle;
 	}

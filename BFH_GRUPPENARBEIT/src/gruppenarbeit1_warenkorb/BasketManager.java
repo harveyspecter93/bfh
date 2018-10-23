@@ -32,7 +32,7 @@ public class BasketManager {
 		if (itemsInBasket.isEmpty()) {	
 			System.out.println(this.bundle.getString("EMPTY_BASKET"));
 		}else {
-			System.out.println("Your Basket:");
+			System.out.println(this.bundle.getString("YOUR_BASKET"));
 			for (ShoppingItem item : itemsInBasket) {
 			    
 				amountInBasket = item.getAmountInBasket();
@@ -50,8 +50,8 @@ public class BasketManager {
 			    totalPrice += item.getPrice() * item.getAmountInBasket();
 			    totalTax += calculateTaxOfItem(item) * item.getAmountInBasket();
 			}
-			System.out.println("\nTotal price is " + String.format("%.2f", totalPrice) + " CHF with a total amount of " + 
-					String.format("%.2f", totalTax) + " CHF taxes (" + String.format("%.2f",calculateTotalTax(totalPrice, totalTax)) + "%). \n");
+			System.out.println(this.bundle.getString("TOTAL_IS") + String.format("%.2f", totalPrice) + " " + this.bundle.getString("WITH_TAX") + 
+					String.format("%.2f", totalTax) + " " + this.bundle.getString("TAXES_CHF") + String.format("%.2f",calculateTotalTax(totalPrice, totalTax)) + "%). \n");
 			
 		}
 		showPossibleBuys();
@@ -103,17 +103,17 @@ public class BasketManager {
 		while(productToBuy <= 0) {
 			productToBuy = readNumber();
 		}
-		System.out.println("Thank you! Got " + productToBuy);
+		System.out.println(this.bundle.getString("THANKS_GOT_ITEM") + productToBuy);
 	
 		ShoppingItem itemToBuy = availableItems.get(productToBuy - 1); 
 		
-		System.out.println("How many " + itemToBuy.getName() + " you'd like to add to your basket? (Integer or a to abort)");
+		System.out.println(this.bundle.getString("HOW_MANY") + itemToBuy.getName() + " " +this.bundle.getString("CHOICE_AMOUNT_ADD"));
 		// check for Quit
 		int amountToBuy = readAmount();
 		if(amountToBuy != 0) {
 		addItemToBasket(itemToBuy, amountToBuy);
 		}else {
-			System.out.println("You changed your mind and don't want to add " + itemToBuy.getName());
+			System.out.println(this.bundle.getString("CHANGED_MIND") + itemToBuy.getName());
 		}
 		showCurrentBasket();
 	}
@@ -123,19 +123,18 @@ public class BasketManager {
 		if (itemsInBasket.isEmpty()) {
 			itemsInBasket.add(shoppingItem);
 			shoppingItem.setAmountInBasket(amount);
-			System.out.println("Item " + shoppingItem.getName() + " was added to the basket. Thanks!");
+			System.out.println(this.bundle.getString("ITEM") + shoppingItem.getName() + " " +this.bundle.getString("WAS_ADDED"));
 		} else {
-			
 			ShoppingItem itemInBasket = getItemFromBasket(shoppingItem);
 			if( itemInBasket instanceof ShoppingItem){
 				//add amount of item in basket
 				itemInBasket.setAmountInBasket(itemInBasket.getAmountInBasket() + amount);
-				System.out.println("Successfully updated amount of " + shoppingItem.getName() + "!");
+				System.out.println(this.bundle.getString("SUCCESS_UPDATE") + shoppingItem.getName() + "!");
 			}else {
 				//add item to the basket with given amount
 				itemsInBasket.add(shoppingItem);
 				shoppingItem.setAmountInBasket(amount);
-				System.out.println("Item " + shoppingItem.getName() + " was added to the basket. Thanks!");
+				System.out.println(this.bundle.getString("ITEM") + shoppingItem.getName() + " " +this.bundle.getString("WAS_ADDED"));
 			}
 		}
 	}
@@ -153,13 +152,13 @@ public class BasketManager {
 					System.out.println(this.bundle.getString("BYE"));
 					System.exit(1);
 				}
-				System.out.println("That's not a valid input!");
+				System.out.println(this.bundle.getString("INVALID_INPUT"));
 				number = 0;
 			}
 			
 			number = input.nextInt();
 			if(number > availableItems.size()) {
-				System.out.println("This is not a valid item! Please try again..");
+				System.out.println(this.bundle.getString("INVALID_ITEM"));
 				number = 0;
 			}
 		}
@@ -176,7 +175,7 @@ public class BasketManager {
 				// check for quit
 				
 				if("a".equals(input.nextLine())) {
-					System.out.println("Aborting..");
+					System.out.println(this.bundle.getString("ABORT"));
 				}
 				
 				return 0;
@@ -186,7 +185,7 @@ public class BasketManager {
 		}
 		
 		
-		System.out.println("Thank you! Got " + amount);
+		System.out.println(this.bundle.getString("THANKS_GOT") + amount);
 		return amount;
 	}
 	
