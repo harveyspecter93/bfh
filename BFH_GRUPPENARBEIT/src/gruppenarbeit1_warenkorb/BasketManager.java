@@ -120,6 +120,11 @@ public class BasketManager {
 	}
 
 	public void addItemToBasket(ShoppingItem shoppingItem, int amount) {
+		//check amount
+		if(amount >= 1000) {
+			showErrorAmount();
+		}
+		
 		// check if basket is empty
 		if (itemsInBasket.isEmpty()) {
 			itemsInBasket.add(shoppingItem);
@@ -129,17 +134,28 @@ public class BasketManager {
 			ShoppingItem itemInBasket = getItemFromBasket(shoppingItem);
 			if( itemInBasket instanceof ShoppingItem){
 				//add amount of item in basket
+				if(itemInBasket.getAmountInBasket() + amount <= 999) {
 				itemInBasket.setAmountInBasket(itemInBasket.getAmountInBasket() + amount);
 				System.out.println(this.bundle.getString("SUCCESS_UPDATE") + shoppingItem.getName() + "!");
-			}else {
+				}else {
+					showErrorAmount();
+				}
+				}else {
 				//add item to the basket with given amount
 				itemsInBasket.add(shoppingItem);
 				shoppingItem.setAmountInBasket(amount);
 				System.out.println(this.bundle.getString("ITEM") + shoppingItem.getName() + " " +this.bundle.getString("WAS_ADDED"));
 			}
 		}
+		
 	}
-
+	
+	public void showErrorAmount() {
+		
+		System.out.println(this.bundle.getString("OVER999"));
+		
+	}
+	
 	public int readNumber() {
 		Scanner input = new Scanner(System.in);
 		int number = 0;
@@ -185,8 +201,6 @@ public class BasketManager {
 			amount = input.nextInt();
 		}
 		
-		
-		System.out.println(this.bundle.getString("THANKS_GOT") + amount);
 		return amount;
 	}
 	
