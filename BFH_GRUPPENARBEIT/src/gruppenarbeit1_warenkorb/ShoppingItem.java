@@ -4,8 +4,7 @@ public class ShoppingItem {
 	/*
 	* Gruppenarbeit 01: Warenkorb
 	* Klasse 1o
-	* Ziegler, Andrin; Frei, Yannick; Dr√§yer, Michael
-	*
+	* Ziegler, Andrin; Frei, Yannick; Dr‰yer, Michael
 	*/
 	// the fields
 	private String name;
@@ -50,5 +49,9 @@ public class ShoppingItem {
 
 	public void setTaxRate(double taxRate) {
 		this.taxRate = taxRate;
+	}
+	
+	public int getAmountLength() {
+		return (int) Math.log10(this.getAmountInBasket()) + 1;
 	}
 }

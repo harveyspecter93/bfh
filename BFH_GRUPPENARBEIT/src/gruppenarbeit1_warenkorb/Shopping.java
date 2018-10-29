@@ -9,8 +9,7 @@ public class Shopping {
 	/*
 	* Gruppenarbeit 01: Warenkorb
 	* Klasse 1o
-	* Ziegler, Andrin; Frei, Yannick; DrÃ¤yer, Michael
-	*
+	* Ziegler, Andrin; Frei, Yannick; Dräyer, Michael
 	*/
 	public static void main(String[] args) {
 		ResourceBundle bundle = chooseLanguage();
@@ -45,8 +44,8 @@ public class Shopping {
 	
 		// choose language
 		System.out.println("----------------------------------------------------------------");
-		System.out.println("WÃ¤hlen Sie Ihre Sprache! / Choose your language!");
-		System.out.println("de fÃ¼r deutsch, en fÃ¼r englisch / en for english de for german!");		
+		System.out.println("Wählen Sie Ihre Sprache! / Choose your language!");
+		System.out.println("de für deutsch, en für englisch / en for english de for german!");		
 		
 		
 		//default is german
@@ -63,7 +62,7 @@ public class Shopping {
 				System.out.println(currentBundle.getString("LANGUAGE_CHOSEN"));
 				break;
 			}
-			System.out.println("No language chosen! try again. Noch keine Sprache ausgewÃ¤hlt! Versuchen Sie es erneut.");
+			System.out.println("No language chosen! try again. Noch keine Sprache ausgewählt! Versuchen Sie es erneut.");
 		}
 		return currentBundle;
 	}
