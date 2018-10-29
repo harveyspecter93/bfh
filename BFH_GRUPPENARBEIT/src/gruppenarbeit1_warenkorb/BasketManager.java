@@ -8,7 +8,7 @@ public class BasketManager {
 	/*
 	* Gruppenarbeit 01: Warenkorb
 	* Klasse 1o
-	* Ziegler, Andrin; Frei, Yannick; Dräyer, Michael
+	* Ziegler, Andrin; Frei, Yannick; Drï¿½yer, Michael
 	*/
 	
 	private ArrayList<ShoppingItem> availableItems;
@@ -121,7 +121,6 @@ public class BasketManager {
 	}
 
 	public void addItemToBasket(ShoppingItem shoppingItem, int amount) {
-
 		// check if basket is empty
 		if (itemsInBasket.isEmpty()) {
 			itemsInBasket.add(shoppingItem);
@@ -194,7 +193,6 @@ public class BasketManager {
 	}
 
 	public ShoppingItem getItemFromBasket(ShoppingItem item) {
-
 		for (ShoppingItem shoppingItemInBasket : itemsInBasket) {
 			if (shoppingItemInBasket.getName() == item.getName()) {
 				// if the names are equal, item is already in basket
@@ -206,7 +204,6 @@ public class BasketManager {
 	}
 	
 	public int getMaxItemAmountLength() {
-		
 		//set default
 		int maxLength = 5;
 		
