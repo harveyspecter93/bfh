@@ -16,8 +16,6 @@ public class Shopping {
 		// stock the shop!
 		ArrayList<ShoppingItem> availableItems = stockTheshop(bundle);
 		BasketManager basketManager = new BasketManager(availableItems, bundle);
-		basketManager.showCurrentBasket();
-		basketManager.enableBuying();
 	}
 
 	private static ArrayList<ShoppingItem> stockTheshop(ResourceBundle bundle) {
