@@ -11,11 +11,20 @@ public class Shopping {
 	* Klasse 1o
 	* Ziegler, Andrin; Frei, Yannick; Dräyer, Michael
 	*/
+	
+	private static boolean isShopping = true;
+	
 	public static void main(String[] args) {
 		ResourceBundle bundle = chooseLanguage();
 		// stock the shop!
 		ArrayList<ShoppingItem> availableItems = stockTheshop(bundle);
 		BasketManager basketManager = new BasketManager(availableItems, bundle);
+	
+		while(isShopping) {
+			basketManager.showCurrentBasket();
+			basketManager.showPossibleBuys();
+			isShopping = basketManager.enableBuying();
+		}
 	}
 
 	private static ArrayList<ShoppingItem> stockTheshop(ResourceBundle bundle) {
@@ -34,29 +43,24 @@ public class Shopping {
 	private static ResourceBundle chooseLanguage() {
 		Scanner input = new Scanner(System.in);
 		String lang = "";
-		ResourceBundle currentBundle;
-		Locale englishLocale = new Locale("en", "EN");
-		ResourceBundle bundleEnglish = ResourceBundle.getBundle( "resource/strings_en", englishLocale );
-		Locale germanLocale = new Locale("de", "DE");
-		ResourceBundle bundleGerman = ResourceBundle.getBundle( "resource/strings_de", germanLocale );
+		ResourceBundle currentBundle = null;
 	
 		// choose language
 		System.out.println("----------------------------------------------------------------");
 		System.out.println("Wählen Sie Ihre Sprache! / Choose your language!");
 		System.out.println("de für deutsch, en für englisch / en for english de for german!");		
 		
-		
-		//default is german
-		currentBundle = bundleGerman;
-		
+				
 		while(input.hasNextLine()) {
 			lang = input.nextLine();
 			if ("en".equals(lang)) {
-				currentBundle = bundleEnglish;	
+				Locale englishLocale = new Locale("en", "EN");
+				currentBundle = ResourceBundle.getBundle( "resource/strings_en", englishLocale );;	
 				System.out.println(currentBundle.getString("LANGUAGE_CHOSEN"));
 				break;
 			}else if("de".equals(lang)){
-				currentBundle = bundleGerman;				
+				Locale germanLocale = new Locale("de", "DE");
+				currentBundle = ResourceBundle.getBundle( "resource/strings_de", germanLocale );				
 				System.out.println(currentBundle.getString("LANGUAGE_CHOSEN"));
 				break;
 			}

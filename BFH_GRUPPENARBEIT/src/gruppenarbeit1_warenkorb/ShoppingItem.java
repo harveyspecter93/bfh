@@ -54,4 +54,13 @@ public class ShoppingItem {
 	public int getAmountLength() {
 		return (int) Math.log10(this.getAmountInBasket()) + 1;
 	}
+	
+	/**
+	     * equal if their names are same.
+	     */
+	    @Override
+	    public boolean equals(Object obj) {
+	        return this.name.equals(((ShoppingItem) obj).name);
+	    }
+
 }

@@ -6,37 +6,35 @@ import java.util.Scanner;
 
 public class BasketManager {
 	/*
-	* Gruppenarbeit 01: Warenkorb
-	* Klasse 1o
-	* Ziegler, Andrin; Frei, Yannick; Dräyer, Michael
-	*/
-	
+	 * Gruppenarbeit 01: Warenkorb Klasse 1o Ziegler, Andrin; Frei, Yannick; Dräyer,
+	 * Michael
+	 */
+
 	private ArrayList<ShoppingItem> availableItems;
 	private ArrayList<ShoppingItem> itemsInBasket = new ArrayList<ShoppingItem>();
 	private MessageHandler messages;
 
 	/**
-	 * Konstruktor, wird aufgerufen bei der Insanziierung des BasketManagers
-	 * Setzt die Verfügbaren Artikel (availableItems-Parameter) als Klassenattribut
-	 * Erzeugt eine neue Instanz der MessageHandler-Klasse (mithilfe des bundle-Parameters)
-	 * und speichert diese Instanz ebenfalls als Klassenattribut
+	 * Konstruktor, wird aufgerufen bei der Insanziierung des BasketManagers Setzt
+	 * die Verfügbaren Artikel (availableItems-Parameter) als Klassenattribut
+	 * Erzeugt eine neue Instanz der MessageHandler-Klasse (mithilfe des
+	 * bundle-Parameters) und speichert diese Instanz ebenfalls als Klassenattribut
 	 *
-	 * @param availableItems <java.util.ArrayList<ShoppingItem>> Verfügbare Artikel im Shop
-	 * @param bundle <java.util.ResourceBundle> ResourceBundle zum Zugriff auf die Texte
+	 * @param availableItems <java.util.ArrayList<ShoppingItem>> Verfügbare Artikel
+	 *                       im Shop
+	 * @param bundle         <java.util.ResourceBundle> ResourceBundle zum Zugriff
+	 *                       auf die Texte
 	 */
-	public BasketManager(ArrayList<ShoppingItem> availableItems, ResourceBundle bundle) { 
+	public BasketManager(ArrayList<ShoppingItem> availableItems, ResourceBundle bundle) {
 		this.availableItems = availableItems;
 		this.messages = new MessageHandler(bundle);
-		
-		showCurrentBasket();
-		enableBuying();
 	}
 
 	/**
 	 * Gibt den aktuellen Warenkorb in der Konsole aus
 	 */
-	private void showCurrentBasket() {
-		
+	void showCurrentBasket() {
+
 		double totalPrice = 0;
 		double totalTax = 0;
 		int itemAmountPadding = 0, itemPricePadding = 0, amountInBasket = 0;
@@ -49,7 +47,7 @@ public class BasketManager {
 			System.out.println(messages.getString("EMPTY_BASKET"));
 		} else {
 			System.out.println(messages.getString("YOUR_BASKET"));
-						
+
 			for (ShoppingItem item : itemsInBasket) {
 
 				amountInBasket = item.getAmountInBasket();
@@ -60,30 +58,29 @@ public class BasketManager {
 
 				String formatedOutput = String.format(padLeft(" ", itemAmountPadding) + amountInBasket + " "
 						+ item.getName() + padLeft(itemPrice, itemPricePadding) + padLeft(itemTotalPrice, 15));
-				
+
 				System.out.println(formatedOutput);
 
 				totalPrice += item.getPrice() * item.getAmountInBasket();
 				totalTax += calculateTaxOfItem(item) * item.getAmountInBasket();
 			}
-			
-			System.out.println(messages.getString("BASKET_AMOUNT", String.format("%.2f", totalPrice), String.format("%.2f", totalTax), String.format("%.2f", calculateTotalTax(totalPrice, totalTax))));
-			
+
+			System.out.println(messages.getString("BASKET_AMOUNT", String.format("%.2f", totalPrice),
+					String.format("%.2f", totalTax), String.format("%.2f", calculateTotalTax(totalPrice, totalTax))));
+
 		}
-		showPossibleBuys();
 	}
 
-	
 	/**
 	 * Gibt die zu kaufenden Artikel mit Preis und MwSt-Angabe in der Konsole aus
 	 */
-	private void showPossibleBuys() {
+	void showPossibleBuys() {
 		String number, itemName, itemPrice, itemTax;
 		int itemPadding = 0;
-		
+
 		System.out.println("---------------------");
 		System.out.println(messages.getString("ITEMS_AVAILABLE"));
-		
+
 		for (int i = 1; i < availableItems.size() + 1; i++) {
 
 			number = i + ") ";
@@ -101,12 +98,13 @@ public class BasketManager {
 
 		System.out.println("---------------------\n");
 
-		enableBuying();
 	}
 
 	/**
 	 * Fügt dem String s ein Left-Padding von n hinzu
-	 * @param s <java.lang.String> String, dem ein Left-Padding hinzugefügt werden soll
+	 * 
+	 * @param s <java.lang.String> String, dem ein Left-Padding hinzugefügt werden
+	 *          soll
 	 * @param n <int> Grösse des Left-Padding
 	 * @return
 	 */
@@ -116,7 +114,9 @@ public class BasketManager {
 
 	/**
 	 * Berechnet die MwSt eines gegebenen Items (shoppingItem)
-	 * @param shoppingItem <gruppenarbeit1_warenkorb.ShoppingItem Item, von welchem die MwSt berechnet werden soll
+	 * 
+	 * @param shoppingItem <gruppenarbeit1_warenkorb.ShoppingItem Item, von welchem
+	 *                     die MwSt berechnet werden soll
 	 * @return
 	 */
 	private double calculateTaxOfItem(ShoppingItem shoppingItem) {
@@ -125,8 +125,10 @@ public class BasketManager {
 
 	/**
 	 * Berechnet den Prozentsatz der enthaltenen Mehrwertsteuer im Gesamtpreis
+	 * 
 	 * @param totalPrice <double> Der Gesamtpreis des Warenkorbs
-	 * @param totalTax <double> Die Total-Mehrwertsteuer, die im Gesamtpreis enthalten sind
+	 * @param totalTax   <double> Die Total-Mehrwertsteuer, die im Gesamtpreis
+	 *                   enthalten sind
 	 * @return
 	 */
 	private double calculateTotalTax(double totalPrice, double totalTax) {
@@ -136,17 +138,17 @@ public class BasketManager {
 	/**
 	 * Gibt dem Benutzer die Möglichkeit einen Artikel zu kaufen
 	 */
-	private void enableBuying() {
+	boolean enableBuying() {
 		System.out.println(messages.getString("ITEM_CHOICE"));
 
-		// check for Quit
-		int productToBuy = 0;
-		while (productToBuy <= 0) {
-			productToBuy = readNumber();
+		int productToBuy = readNumber();
+
+		if (productToBuy == 0) {
+			return false;
 		}
 
 		ShoppingItem itemToBuy = availableItems.get(productToBuy - 1);
-		
+
 		System.out.println(messages.getString("AMOUNT_ADD", itemToBuy.getName()));
 
 		// check for Quit
@@ -156,13 +158,18 @@ public class BasketManager {
 		} else {
 			System.out.println(messages.getString("CHANGED_MIND", itemToBuy.getName()));
 		}
-		showCurrentBasket();
+
+		return true;
+
 	}
 
 	/**
 	 * Fügt dem Warenkorb die Menge (amount) des Artikels (shoppingItem) hinzu.
-	 * @param shoppingItem <gruppenarbeit1_warenkorb.ShoppingItem> Artikel, der dem Warenkorb hinzugefügt werden soll
-	 * @param amount <int> Die Anzahl, die vom Artikel zum Warenkorb hinzugefügt werden soll.
+	 * 
+	 * @param shoppingItem <gruppenarbeit1_warenkorb.ShoppingItem> Artikel, der dem
+	 *                     Warenkorb hinzugefügt werden soll
+	 * @param amount       <int> Die Anzahl, die vom Artikel zum Warenkorb
+	 *                     hinzugefügt werden soll.
 	 */
 	private void addItemToBasket(ShoppingItem shoppingItem, int amount) {
 
@@ -172,16 +179,16 @@ public class BasketManager {
 			shoppingItem.setAmountInBasket(amount);
 			System.out.println(messages.getString("ITEM_ADDED", shoppingItem.getName()));
 		} else {
-			ShoppingItem itemInBasket = getItemFromBasket(shoppingItem);
-			if (itemInBasket instanceof ShoppingItem) {
-				// add amount of item in basket
-					itemInBasket.setAmountInBasket(itemInBasket.getAmountInBasket() + amount);
-					System.out.println(messages.getString("SUCCESS_UPDATE", shoppingItem.getName()));
+
+			if (itemsInBasket.contains(shoppingItem)) {
+				// item already in basket => add amount of item in basket
+				ShoppingItem itemInBasket = getItemFromBasket(shoppingItem);
+				itemInBasket.setAmountInBasket(itemInBasket.getAmountInBasket() + amount);
+				System.out.println(messages.getString("SUCCESS_UPDATE", shoppingItem.getName()));
 			} else {
-				// add item to the basket with given amount
+				// item not already in basket => add item to the basket with given amount
 				itemsInBasket.add(shoppingItem);
 				shoppingItem.setAmountInBasket(amount);
-
 				System.out.println(messages.getString("ITEM_ADDED", shoppingItem.getName()));
 			}
 		}
@@ -189,7 +196,9 @@ public class BasketManager {
 	}
 
 	/**
-	 * Liest anhand eines java.util.Scanner die Nummer des Artikels, welcher dem Warenkorb hinzugefügt werden soll
+	 * Liest anhand eines java.util.Scanner die Nummer des Artikels, welcher dem
+	 * Warenkorb hinzugefügt werden soll
+	 * 
 	 * @return
 	 */
 	private int readNumber() {
@@ -203,7 +212,7 @@ public class BasketManager {
 
 				if ("q".equals(input.nextLine())) {
 					System.out.println(messages.getString("BYE"));
-					System.exit(1);
+					return 0;
 				}
 				System.out.println(messages.getString("INVALID_INPUT"));
 				number = 0;
@@ -215,12 +224,13 @@ public class BasketManager {
 				number = 0;
 			}
 		}
-		
+
 		return number;
 	}
 
 	/**
 	 * Liest anhand eines java.util.Scanner die gwünschte Menge des Artikels
+	 * 
 	 * @return
 	 */
 	private int readAmount() {
@@ -241,44 +251,52 @@ public class BasketManager {
 
 			amount = scanAmount.nextInt();
 		}
-		
+
 		return amount;
 	}
 
 	/**
 	 * Gibt den Artikel zurück, sofern dieser bereits im Warenkorb ist
-	 * @param item <gruppenarbeit1_warenkorb.ShoppingItem> Artikel, der geprüft werden soll
+	 * 
+	 * @param item <gruppenarbeit1_warenkorb.ShoppingItem> Artikel, der geprüft
+	 *             werden soll
 	 * @return
 	 */
 	private ShoppingItem getItemFromBasket(ShoppingItem item) {
 
-		for (ShoppingItem shoppingItemInBasket : itemsInBasket) {
-			if (shoppingItemInBasket.getName() == item.getName()) {
-				// if the names are equal, item is already in basket
-				return shoppingItemInBasket;
+		ShoppingItem basketItem = null;
+
+		for (ShoppingItem itemInBasket : itemsInBasket) {
+			if (itemInBasket.getName() == item.getName()) {
+				// we checked already, that there is an item where names are the same
+				basketItem = itemInBasket;
 			}
 		}
 
-		return null;
+		// basketItem will not be null, cause we checked the names with the overridden
+		// contains method
+		return basketItem;
 	}
-	
+
 	/**
-	 * Gibt die Länge(Anzahl Zeichen) der höchsten Menge im Warenkorb zurück.
-	 * Diese wird zur Bestimmung des Left-Padding in der showCurrentBasket-Methode gebraucht.
+	 * Gibt die Länge(Anzahl Zeichen) der höchsten Menge im Warenkorb zurück. Diese
+	 * wird zur Bestimmung des Left-Padding in der showCurrentBasket-Methode
+	 * gebraucht.
+	 * 
 	 * @return
 	 */
 	private int getMaxItemAmountLength() {
-		
-		//set default
+
+		// set default
 		int maxLength = 5;
-		
+
 		for (ShoppingItem item : itemsInBasket) {
-			
-			if(item.getAmountLength() >= maxLength) {
-				maxLength = item.getAmountLength() + 1; //at least a left padding of 1
+
+			if (item.getAmountLength() >= maxLength) {
+				maxLength = item.getAmountLength() + 1; // at least a left padding of 1
 			}
 		}
-		
+
 		return maxLength;
 	}
 
