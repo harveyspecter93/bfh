@@ -215,6 +215,7 @@ public class BasketManager {
 					return 0;
 				}
 				System.out.println(messages.getString("INVALID_INPUT"));
+				input.nextLine(); //needs to consume input
 				number = 0;
 			}
 
