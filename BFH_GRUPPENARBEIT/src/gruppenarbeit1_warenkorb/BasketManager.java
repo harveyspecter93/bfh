@@ -219,7 +219,7 @@ public class BasketManager {
 			}
 
 			number = input.nextInt();
-			if (number > availableItems.size()) {
+			if (number > availableItems.size() || number <= 0) {
 				System.out.println(messages.getString("INVALID_ITEM"));
 				number = 0;
 			}
