@@ -7,7 +7,8 @@ public class Dozent extends Person{
    private String[] faecher;   //optional
    
    public Dozent(String name, String vorname, String heimatOrt, Date gebDat, char gender, int dozId){
-      super ()
+      super (name, vorname, heimatOrt, gebDat, gender, Person.TYP_DOZENT);
+      this.dozId = dozId;
    }
    
    public Dozent(String name, String vorname, String heimatOrt, Date gebDat, char gender, int dozId, String[] faecher){
