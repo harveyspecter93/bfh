@@ -14,7 +14,6 @@ public class Anschrift {
 		this.strasse = strasse;
 		this.nr = nr;
 		
-		//test
 	}
 
 	public Anschrift(String plz, String ort, String strasse, String nr) {
