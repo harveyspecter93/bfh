@@ -42,7 +42,7 @@ public class Anschrift {
 	private void checkPlz(String plz) {
         if (plz == null) {
         	throw new RuntimeException("PLZ muss angeben werden");
-        } else if (plz.length() != 4 && land.equals("CH")) {
+        } else if (plz.length() != 4 && land.equals("CH")) {//Da ausländische Postleitzahlen nicht vierstellig sind
         	throw new RuntimeException("PLZ ist nicht 4-Stellig!");
         }
 		else {
