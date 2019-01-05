@@ -1,6 +1,6 @@
 /*
 * Gruppenarbeit 2: 
-* Dräyer Michael; Frei Yannick; Ziegler Andrin; 
+* Drï¿½yer Michael; Frei Yannick; Ziegler Andrin; 
 * Klasse 1o
 */
 
@@ -16,33 +16,33 @@ public class Anschrift {
 	//Konstruktor bei Angabe aller Werte
 	public Anschrift(String land, String plz, String ort, String strasse, String nr) {
 		this.land = land;
-		this.checkPlz(plz);
+		checkAndSetPlz(plz);
 		this.ort = ort;
 		this.strasse = strasse;
 		this.nr = nr;
 		
 	}
 	
-	//ergänze um einen Konstruktor, so dass bei nicht vorhandener Angabe von "land" der Wert "CH" gesetzt wird
-		// in diesem Fall prüfen, ob "plz" 4-stellig ist, sonst RuntimeException
-		// auslösen (vgl. class Person)
+	//ergï¿½nze um einen Konstruktor, so dass bei nicht vorhandener Angabe von "land" der Wert "CH" gesetzt wird
+		// in diesem Fall prï¿½fen, ob "plz" 4-stellig ist, sonst RuntimeException
+		// auslï¿½sen (vgl. class Person)
 		// ...
 	
 	//Konstruktor welchem Land den Defaultwert CH zuweist.
 	public Anschrift(String plz, String ort, String strasse, String nr) {
 		this.land = "CH";
-		this.checkPlz(plz);
+		checkAndSetPlz(plz);
 		this.ort = ort;
 		this.strasse = strasse;
 		this.nr = nr;
 
 	}
 
-	//Postleitzahl wird auf 4 Stellen überprüft und darf nicht leer sein.
-	private void checkPlz(String plz) {
+	//Postleitzahl wird auf 4 Stellen ï¿½berprï¿½ft und darf nicht leer sein.
+	private void checkAndSetPlz(String plz) {
         if (plz == null) {
         	throw new RuntimeException("PLZ muss angeben werden");
-        } else if (plz.length() != 4 && land.equals("CH")) {//Da ausländische Postleitzahlen nicht vierstellig sind
+        } else if (plz.length() != 4 && land.equals("CH")) {//Da auslï¿½ndische Postleitzahlen nicht vierstellig sind
         	throw new RuntimeException("PLZ ist nicht 4-Stellig!");
         }
 		else {
@@ -51,7 +51,7 @@ public class Anschrift {
 
 	}
 	
-	//padding rechts, für formatierte Ausgabe
+	//padding rechts, fï¿½r formatierte Ausgabe
 	private static String padRight(String s, int n) {
 		return String.format("%1$-" + n + "s", s);
 	}

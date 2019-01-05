@@ -1,6 +1,6 @@
 /*
 * Gruppenarbeit 2: 
-* Dräyer Michael; Frei Yannick; Ziegler Andrin; 
+* Drï¿½yer Michael; Frei Yannick; Ziegler Andrin; 
 * Klasse 1o
 */
 
@@ -25,7 +25,7 @@ public class PersonenProgramm {
       pA[1].setAnschrift(new Anschrift("DE", "77977", "Rust", "Europaparkallee", "203c" ));
           
       LocalDate d2 = LocalDate.of(1993,02,20);
-      pA[2] = new Student( "Dräyer", "Michael", "Thun", d2, 'm', 1001, "Wirtschaftsinformatik" );
+      pA[2] = new Student( "Drï¿½yer", "Michael", "Thun", d2, 'm', 1001, "Wirtschaftsinformatik" );
       pA[2].setAnschrift(new Anschrift("3604", "Thun", "Ulmenweg", "65" ));
       
       LocalDate d3 = LocalDate.of(1994,05,30);
@@ -34,7 +34,7 @@ public class PersonenProgramm {
       
       LocalDate d4 = LocalDate.of(1996,02,9);
       pA[4] = new Student( "Ziegler", "Andrin", "", d4, 'm', 1003, "Wirtschaftsinformatik" );
-      pA[4].setAnschrift(new Anschrift("3600", "Bern", "Bahnhofstrasse", "8" ));
+      pA[4].setAnschrift(new Anschrift("3097", "Liebefeld", "KÃ¶nizstrasse", "180" ));
       
       LocalDate d5 = LocalDate.of(2002,06,24);
       pA[5] = new Student( "Enis", "Peter", "Murten", d5, 'm', 1004, "" );
@@ -43,7 +43,7 @@ public class PersonenProgramm {
       LocalDate d6 = LocalDate.of(1931,8,12);
       pA[6] = new Student( "Schmid", "Anton", "Lyss", d6, ' ', 1005, "Architektur" );
       
-      pA[7] = new Dozent( "Häberli", "Gustav", "Frutigen", null, 'm', 101, new String[]{ "FRWI", "Programmieren"} );
+      pA[7] = new Dozent( "Hï¿½berli", "Gustav", "Frutigen", null, 'm', 101, new String[]{ "FRWI", "Programmieren"} );
       pA[7].setAnschrift(new Anschrift("3122", "Kirchdorf", "Dorf", "71" ));
       
 
@@ -77,10 +77,10 @@ public class PersonenProgramm {
           }
        }
       
-      //Ausgabe älteste und jüngste Person
+      //Ausgabe ï¿½lteste und jï¿½ngste Person
       System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------");
       System.out.println("\n\n--------------------------------------------------------------");
-      System.out.println("Älteste und jüngste Person in der Liste");
+      System.out.println("ï¿½lteste und jï¿½ngste Person in der Liste");
       System.out.println("--------------------------------------------------------------");
       Person.getOldest(pA);
       
@@ -88,7 +88,7 @@ public class PersonenProgramm {
       
    }
    
-	//padding rechts, für formatierte Ausgabe
+	//padding rechts, fï¿½r formatierte Ausgabe
 	private static String padRight(String s, int n) {
 		return String.format("%1$-" + n + "s", s);
 	}
