@@ -3,6 +3,7 @@ package gruppenarbeit3_bankomatsimulator;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class KundeDAO {
    List<Kunde> all = new LinkedList<Kunde>();
