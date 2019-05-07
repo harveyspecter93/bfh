@@ -9,13 +9,13 @@ public class KundeDAO {
    List<Kunde> all = new LinkedList<Kunde>();
    
    public KundeDAO(){//diese Kunden sollen existieren
-      all.add(new Kunde(1000000, "Meier", "Gabi"));
-      all.add(new Kunde(2000000, "Maurer", "Rolf"));      
-      all.add(new Kunde(1000001, "Wirth", "Nicola"));
-      all.add(new Kunde(1000002, "Casutt", "Ralf"));
-      all.add(new Kunde(1000003, "Breset", "Maurice"));
-      all.add(new Kunde(4000000, "Schindler", "Ueli"));
-      all.add(new Kunde(1999999, "Leuthard", "Dora"));
+      all.add(new Kunde(1000000, "Meier", "Gabi", "9876-2309-2765-9", "1112"));
+      all.add(new Kunde(2000000, "Maurer", "Rolf", "7562-0994-4984-1", "9876"));      
+      all.add(new Kunde(1000001, "Wirth", "Nicola", "9862-0994-4965-9", "7865"));
+      all.add(new Kunde(1000002, "Casutt", "Ralf", "9222-2221-2323-1", "7860"));
+      all.add(new Kunde(1000003, "Breset", "Maurice", "1212-8743-2435-1", "99999"));
+      all.add(new Kunde(4000000, "Schindler", "Ueli", "1022-2221-2323-1","11221"));
+      all.add(new Kunde(1999999, "Leuthard", "Dora", "0976-5210-5552-1", "98976"));
    }
    
    //alle auf einmal
