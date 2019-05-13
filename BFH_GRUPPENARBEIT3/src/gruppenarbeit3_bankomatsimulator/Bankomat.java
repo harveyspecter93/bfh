@@ -123,6 +123,8 @@ public class Bankomat {
 			return Aktion.AUSZAHLEN;
 		} else if (input.contains("3")) {
 			return Aktion.KONTOABFRAGE;
+		}else if (input.contains("4")) {
+			return Aktion.ABSCHLIESSEN;
 		}
 
 		return null;
