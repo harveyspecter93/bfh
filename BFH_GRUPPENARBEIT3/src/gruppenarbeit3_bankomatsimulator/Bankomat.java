@@ -4,10 +4,24 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
+/*
+* Gruppenarbeit 3: 
+* Dräyer Michael; Frei Yannick; Ziegler Andrin; 
+* Klasse 2o
+*/
+
+/**
+ * @author Dräyer Michael; Frei Yannick; Ziegler Andrin;
+ *
+ */
 public class Bankomat {
 	private static final Logger LOGGER = Logger.getLogger(Bankomat.class.getName());
 	static boolean inBenutzung = true;
 
+	/**
+	 * @author Dräyer Michael; Frei Yannick; Ziegler Andrin;
+	 *
+	 */
 	private enum Aktion {
 		EINZAHLEN, AUSZAHLEN, KONTOABFRAGE, ABSCHLIESSEN
 	}
@@ -16,6 +30,9 @@ public class Bankomat {
 	private static final int ANZAHL_VERSUCHE_PIN_BANKOMAT = 3;
 	private static final String KARTEN_ID = "7562-0994-4984-1";
 
+	/**
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		// Formatting logger
 		System.setProperty("java.util.logging.SimpleFormatter.format", "[%1$tF %1$tT] [%4$-7s] %5$s %n");
@@ -77,6 +94,9 @@ public class Bankomat {
 		}
 	}
 
+	/**
+	 * @param konto
+	 */
 	private static void startEinzahlung(Konto konto) {
 		LOGGER.info("Wie viel möchten Sie einzahlen?");
 		Double menge = 0D;
@@ -89,6 +109,9 @@ public class Bankomat {
 		konto.einzahlen(menge);
 	}
 
+	/**
+	 * @param konto
+	 */
 	private static void startAuszahlung(Konto konto) {
 		LOGGER.info("Wie viel möchten Sie abheben?");
 		Double menge = 0D;
@@ -106,6 +129,11 @@ public class Bankomat {
 		konto.kontoAbfragen();
 	}
 
+	/**
+	 * @param kundenNummer
+	 * @param kontenListe
+	 * @return
+	 */
 	private static Konto fetchKontoForKunde(int kundenNummer, List<Konto> kontenListe) {
 		for (Konto konto : kontenListe) {
 			if (konto.getKundenNummer() == kundenNummer) {
@@ -115,6 +143,9 @@ public class Bankomat {
 		return null;
 	}
 
+	/**
+	 * @return
+	 */
 	private static Aktion determineAktion() {
 		String input = readInput();
 		if (input.contains("1")) {
@@ -123,13 +154,16 @@ public class Bankomat {
 			return Aktion.AUSZAHLEN;
 		} else if (input.contains("3")) {
 			return Aktion.KONTOABFRAGE;
-		}else if (input.contains("4")) {
+		} else if (input.contains("4")) {
 			return Aktion.ABSCHLIESSEN;
 		}
 
 		return null;
 	}
 
+	/**
+	 * @param kunde
+	 */
 	private static void login(Kunde kunde) {
 		int zaehler = 0;
 		String eingabePin = "";
@@ -154,6 +188,11 @@ public class Bankomat {
 		LOGGER.info("Pin korrekt. Guten Tag " + kunde.getVorname());
 	}
 
+	/**
+	 * @param kundenDaten
+	 * @param kartenId
+	 * @return
+	 */
 	private static Kunde fetchKundeForKarte(KundeDAO kundenDaten, String kartenId) {
 		List<Kunde> kunden = kundenDaten.getAll();
 		for (Kunde kunde : kunden) {
@@ -165,6 +204,9 @@ public class Bankomat {
 		return null;
 	}
 
+	/**
+	 * @return
+	 */
 	private static String readInput() {
 		Scanner input = new Scanner(System.in);
 		StringBuilder sb = new StringBuilder("");

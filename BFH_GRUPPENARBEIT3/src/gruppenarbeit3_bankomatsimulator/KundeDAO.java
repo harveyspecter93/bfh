@@ -3,7 +3,12 @@ package gruppenarbeit3_bankomatsimulator;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.logging.Logger;
+
+/*
+* Gruppenarbeit 3: 
+* Dräyer Michael; Frei Yannick; Ziegler Andrin; 
+* Klasse 2o
+*/
 
 public class KundeDAO {
    List<Kunde> all = new LinkedList<Kunde>();
