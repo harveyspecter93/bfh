@@ -11,7 +11,7 @@ public class TCPClient {
     String clientMessage="",serverMessage="";
     while(!clientMessage.equals("bye")){
       System.out.println("You can talk to the Server now.");
-      System.out.println("Enter a Number, Ping or Bye");
+      System.out.println("Enter a Number, \"Ping\" or \"Bye\"");
       clientMessage=br.readLine();
       
       for (int i = 0; i < 1; i++) {
