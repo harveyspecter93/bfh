@@ -15,9 +15,13 @@ class ServerClientThread extends Thread {
 			DataInputStream inStream = new DataInputStream(serverClient.getInputStream());
 			DataOutputStream outStream = new DataOutputStream(serverClient.getOutputStream());
 			String clientMessage = "";
-			while (!clientMessage.equals("bye")) {
+			while (true) {
 				clientMessage = inStream.readUTF();
 				System.out.println("From Client-" + clientNo + ": Message is :" + clientMessage);
+				if(clientMessage.equals("bye")) {
+					outStream.writeUTF("From Server to Client-" + clientNo + " thanks for talking to me. Bye!");
+					break;
+				}
 				doActionBasedOnMessage(clientMessage, outStream);
 				outStream.flush();
 			}
@@ -41,8 +45,15 @@ class ServerClientThread extends Thread {
 		case "ping":
 			doPingPong(outStream);
 			break;
+		default:
+			answer(clientMessage, outStream);
+			break;
 		}
 		return;
+	}
+
+	private void answer(String clientMessage, DataOutputStream outStream) throws IOException {
+		outStream.writeUTF("From Server to Client-" + clientNo + " no special Action for message: " + clientMessage + " try ping, a Number or bye!");
 	}
 
 	private void doSqaure(String clientMessage, DataOutputStream outStream) throws IOException {
@@ -54,7 +65,7 @@ class ServerClientThread extends Thread {
 	}
 
 	private void doPingPong(DataOutputStream outStream) throws IOException {
-		outStream.writeUTF("Pong");
+		outStream.writeUTF("From Server to Client-" + clientNo + ": Pong!");
 
 	}
 }

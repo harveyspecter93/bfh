@@ -10,7 +10,8 @@ public class TCPClient {
     BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
     String clientMessage="",serverMessage="";
     while(!clientMessage.equals("bye")){
-      System.out.println("Enter number :");
+      System.out.println("You can talk to the Server now.");
+      System.out.println("Enter a Number, Ping or Bye");
       clientMessage=br.readLine();
       outStream.writeUTF(clientMessage);
       outStream.flush();
