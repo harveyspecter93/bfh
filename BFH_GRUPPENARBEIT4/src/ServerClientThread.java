@@ -40,8 +40,10 @@ class ServerClientThread extends Thread {
 			doSqaure(clientMessage, outStream);
 			return;
 		}
-
-		switch (clientMessage) {
+		
+		String clientMessageLowerCase = clientMessage.toLowerCase();
+		
+		switch (clientMessageLowerCase) {
 		case "ping":
 			doPingPong(outStream);
 			break;
