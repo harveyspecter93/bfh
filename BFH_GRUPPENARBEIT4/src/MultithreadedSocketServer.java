@@ -1,7 +1,7 @@
 import java.net.*;
 import java.io.*;
 public class MultithreadedSocketServer {
-  public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws Exception {
     try{
       ServerSocket server=new ServerSocket(8888);
       int counter=0;

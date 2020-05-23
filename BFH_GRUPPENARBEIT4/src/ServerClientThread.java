@@ -58,7 +58,7 @@ class ServerClientThread extends Thread {
 
 	private void doSqaure(String clientMessage, DataOutputStream outStream) throws IOException {
 		int squre = Integer.parseInt(clientMessage) * Integer.parseInt(clientMessage);
-		String serverMessage = "From Server to Client-" + clientNo + " Square of Number in" + clientMessage + " is "
+		String serverMessage = "From Server to Client-" + clientNo + " Square of entered number (" + clientMessage + ") is "
 				+ squre;
 		outStream.writeUTF(serverMessage);
 
