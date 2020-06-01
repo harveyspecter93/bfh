@@ -10,6 +10,9 @@ class ServerClientThread extends Thread {
 		clientNo = counter;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Thread#run()
+	 */
 	public void run() {
 		try {
 			DataInputStream inStream = new DataInputStream(serverClient.getInputStream());
